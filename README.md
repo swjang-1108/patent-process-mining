@@ -8,9 +8,11 @@ This project applies predictive process mining techniques to the USPTO patent ex
 ## Objective
 - Model patent examination as an event log using USPTO PatEx data
 - Predict remaining pendency (time to grant) from incomplete prosecution histories
-- Compare two prediction approaches:
-  - **Direct prediction**: predict total remaining time from prefix features
-  - **Step-level prediction**: predict lag between each event, then accumulate
+- Compare three prediction approaches with increasing feature richness:
+  - **Process-only**: last-state encoding using event timing only (baseline)
+  - **Intra-case**: add patent-specific features (CPC/USPC code, art unit, inventor count, etc.)
+  - **Inter-case**: add resource-aware features (examiner workload, art unit backlog at prefix time)
+- Evaluate using MAE and RMSE (in days)
 - Identify bottlenecks and delay patterns in the examination process
 
 ## Course
@@ -19,7 +21,7 @@ This project was developed as a final project for a Business Process Management 
 ## Data
 Data is not included in this repository due to file size and USPTO redistribution restrictions.
 
-Download the following files from the [USPTO Open Data Portal](https://data.uspto.gov/bulkdata/datasets/ecopair):
+Download the following files from the USPTO Patent Examination Research Dataset (PatEx), available at the [USPTO Open Data Portal](https://data.uspto.gov/bulkdata/datasets/ecopair):
 - `transactions.csv` — prosecution event history for all applications
 - `event_codes.csv` — event code descriptions
 - `application_data.csv` — application metadata (filing date, grant date, examiner, etc.)
